@@ -1,0 +1,77 @@
+<div class="row mb-3">
+  <div class="col-md-8 offset-md-2">
+    <h1>
+     Hey <%= @user.first_name %>, Welcome Back!
+    </h1>
+    
+    
+
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <a href="/goals/new" class="btn btn-primary btn-block">
+      <i class="fa fa-fw fa-plus"></i>
+
+      Get started on a new goal!
+    </a>
+
+    <hr>
+  </div>
+</div>
+
+<div>
+<h3>Your Active Goals:</h3>
+</div>
+
+ <% Goal.where(user_id: @user.id).each do |goal| %>
+ 
+<div class="row mb-5">
+  <div class="col-md-8 offset-md-2">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">
+          <a href="/goals/<%=goal.id%>"><%=goal.name%></a>
+          <small>
+            <%=goal.description%>
+          </small>
+        </h4>
+      </div>
+
+      <div class="card-body">
+        <!--<a href="/photos/133815">-->
+        <!--  <img src="http://res-1.cloudinary.com/dz9hkaczr/image/upload/v1552593660/jdhhlbaimfrsvd24i08e.jpg" class="img-fluid">-->
+        <!--WANT TO TURN THIS INTO A DYNAMIC PROGRESS BAR OF THE GOAL-->
+        <!--</a>-->
+
+        <div>
+
+
+          <ul class="list-unstyled pt-3">
+              <li class="media mb-2">
+                <div class="media-body">
+                  <h6>
+                    <a>You've raised $<%=goal.current_amount%> of your $<%=goal.goal_amount%> goal!</a>
+                  </h6>
+                </div> <!-- media-body -->
+              </li>
+          </ul>
+
+            <div class="btn-group d-flex" role="group">
+                <a href="/goals/<%=goal.id%>/edit" class="btn btn-warning w-100">
+                  <i class="fas fa-edit"></i>
+
+                  Edit
+                </a>
+
+                <a href="/delete_goal/<%=goal.id%>" class="btn btn-danger w-100" rel="nofollow">
+                  <i class="fas fa-trash"></i>
+
+                  Delete
+                </a>
+            </div> <!-- btn-group btn-group-justified -->
+        </div>
+      </div> <!-- card-body -->
+    </div> <!-- card  -->
+  </div> <!-- col-md-8 offset-md-2 -->
+</div> <!-- row -->
+
+<%end%>

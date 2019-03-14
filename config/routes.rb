@@ -77,8 +77,6 @@ Rails.application.routes.draw do
 
   # Routes for the Goal resource:
   
-  root "goals#index"
-
   # CREATE
   get("/goals/new", { :controller => "goals", :action => "new_form" })
   post("/create_goal", { :controller => "goals", :action => "create_row" })
@@ -99,5 +97,18 @@ Rails.application.routes.draw do
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+  
+  #RCAV FOR USERS
+  
+    root "users#show"
+  
+    get("/users", { :controller => "users", :action => "index" })
+    
+    get("/users/:id_to_display", { :controller => "users", :action => "show" })
+  
+  
+  
+  
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

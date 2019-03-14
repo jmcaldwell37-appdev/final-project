@@ -59,6 +59,30 @@
                 </div> <!-- media-body -->
               </li>
           </ul>
+          
+          <ul class="list-unstyled pt-3">
+              <li class="media mb-2">
+                <div class="media-body">
+                  <h6>
+                    <a>Savings Preferences for this goal:</a>
+                  </h6>
+                  
+                <% CustomizedPreference.where(goal_id: goal.id).each do |preference| %>
+                
+                <div>
+                  
+                You save <a href="/customized_preferences/<%=preference.id%>">$<%=preference.transaction_amount%></a> when <a href="events/<%=preference.event_id%>"> <%= Event.find_by(id: preference.event_id).name%></a>
+                
+                </div>
+                 <%end%>
+                
+                  
+                </div> <!-- media-body -->
+              </li>
+          </ul>
+          
+          
+          
 
             <div class="btn-group d-flex" role="group">
                 <a href="/goals/<%=goal.id%>/edit" class="btn btn-warning w-100">

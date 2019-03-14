@@ -1,5 +1,5 @@
 <h1>
-  Edit goal #<%= @goal.id %>
+  Edit your goal: <%= @goal.name %>
 </h1>
 
 <hr>
@@ -7,11 +7,8 @@
 <form action="/update_goal/<%= @goal.id %>" method="post">
 
   <div class="form-group">
-    <label for="user_id">
-      User
-    </label>
-
-    <input type="text" id="user_id" name="user_id" class="form-control" value="<%= @goal.user_id %>">
+    
+    <input type="hidden" id="user_id" name="user_id" class="form-control" value="<%= @goal.user_id %>">
   </div>
 
   <div class="form-group">
@@ -34,7 +31,6 @@
     <input type="hidden" value="0" name="d_or_s">
     <input id="d_or_s" class="form-check-input" name="d_or_s" type="checkbox" value="1" <%= "checked" if @goal.d_or_s %>>
     <label for="d_or_s" class="form-check-label">
-      D or s
     </label>
   </div>
 
@@ -55,11 +51,11 @@
   </div>
 
   <div class="form-group">
-    <label for="deadline">
-      Deadline
-    </label>
+    <!--<label for="deadline">-->
+    <!--  Deadline-->
+    <!--</label>-->
 
-    <input type="text" id="deadline" name="deadline" class="form-control" value="<%= @goal.deadline %>">
+    <input type="hidden" id="deadline" name="deadline" class="form-control" value="<%= @goal.deadline %>">
   </div>
 
   <button class="btn btn-block btn-outline-secondary">

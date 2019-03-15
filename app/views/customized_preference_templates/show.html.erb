@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-md-8 offset-md-2">
     <h1>
-      Customized preference #<%= @customized_preference.id %> details
+      Savings Preference:
     </h1>
 
     <div class="row mb-3">
@@ -24,35 +24,13 @@
       </div>
     </div>
 
+
     <dl>
-      <dt>
-        Event
-      </dt>
-      <dd>
-        <%= @customized_preference.event_id %>
-      </dd>
+      
+      <dt >Summary:</dt>
+      <dd> I will donate <%= @customized_preference.transaction_amount%> to my goal of <%= Goal.find_by(id: @customized_preference.goal_id).name%> when <%= Event.find_by(id: @customized_preference.event_id).name %> </dd>
 
-      <dt>
-        User
-      </dt>
-      <dd>
-        <%= @customized_preference.user_id %>
-      </dd>
-
-      <dt>
-        Transaction amount
-      </dt>
-      <dd>
-        <%= @customized_preference.transaction_amount %>
-      </dd>
-
-      <dt>
-        Goal
-      </dt>
-      <dd>
-        <%= @customized_preference.goal_id %>
-      </dd>
-
+      
       <dt>
         Created at
       </dt>

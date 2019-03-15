@@ -37,6 +37,11 @@
       </div>
 
       <div class="card-body">
+        
+        <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: <%= 100*goal.current_amount.to_f/goal.goal_amount.to_f %>%;" aria-valuenow="<%= goal.current_amount.to_i/goal.goal_amount.to_i %>" aria-valuemin="0" aria-valuemax="100"><%= 100*goal.current_amount.to_i/goal.goal_amount.to_i %>%</div>
+        </div>
+        
         <!--<a href="/photos/133815">-->
         <!--  <img src="http://res-1.cloudinary.com/dz9hkaczr/image/upload/v1552593660/jdhhlbaimfrsvd24i08e.jpg" class="img-fluid">-->
         <!--WANT TO TURN THIS INTO A DYNAMIC PROGRESS BAR OF THE GOAL-->
@@ -54,6 +59,30 @@
                 </div> <!-- media-body -->
               </li>
           </ul>
+          
+          <ul class="list-unstyled pt-3">
+              <li class="media mb-2">
+                <div class="media-body">
+                  <h6>
+                    <a>Savings Preferences for this goal:</a>
+                  </h6>
+                  
+                <% CustomizedPreference.where(goal_id: goal.id).each do |preference| %>
+                
+                <div>
+                  
+                You save <a href="/customized_preferences/<%=preference.id%>">$<%=preference.transaction_amount%></a> when <a href="events/<%=preference.event_id%>"> <%= Event.find_by(id: preference.event_id).name%></a>
+                
+                </div>
+                 <%end%>
+                
+                  
+                </div> <!-- media-body -->
+              </li>
+          </ul>
+          
+          
+          
 
             <div class="btn-group d-flex" role="group">
                 <a href="/goals/<%=goal.id%>/edit" class="btn btn-warning w-100">

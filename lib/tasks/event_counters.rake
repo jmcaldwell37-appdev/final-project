@@ -19,7 +19,7 @@ parsed_data_dos = JSON.parse(open(url_dos).read)
 
   if @daily_low < 32
       @total= Goal.find_by(id: preference.goal_id).current_amount.to_i
-      @total= @total + 1
+      @total= @total + preference.transaction_amount.to_f
       @total= @total.to_s
       @a=Goal.find_by(id: preference.goal_id)
       @a.current_amount= @total
@@ -46,7 +46,7 @@ parsed_dw_data = JSON.parse(open(dwurl).read)
 
   if @countDiffArray[-1] - @countDiffArray[-2] > 0
       @total= Goal.find_by(id: preference.goal_id).current_amount.to_i
-      @total= @total + 1
+      @total= @total + preference.transaction_amount.to_f
       @total= @total.to_s
       @a=Goal.find_by(id: preference.goal_id)
       @a.current_amount= @total
@@ -77,9 +77,9 @@ page = HTTParty.get(url)
 
 @winsDiffArray.insert(-1, @wins)
 
-if @winsDiffArray[-1] - @winsDiffArray[-2] == 0
+if @winsDiffArray[-1] - @winsDiffArray[-2] > 0
       @total= Goal.find_by(id: preference.goal_id).current_amount.to_i
-      @total= @total + 1
+      @total= @total + preference.transaction_amount.to_f
       @total= @total.to_s
       @a=Goal.find_by(id: preference.goal_id)
       @a.current_amount= @total

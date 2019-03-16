@@ -56,3 +56,37 @@ parsed_dw_data = JSON.parse(open(dwurl).read)
   
   end
 end
+
+@winsDiffArray= [5252]
+
+task :win_counter => :environment do
+  require 'open-uri'
+  
+CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "the Bucks win a game").id}").each do |preference|
+
+  
+url = "https://www.nba.com/bucks/stats/team"
+page = HTTParty.get(url) 
+
+  # filename = Rails.root.join("lib", "espn", "bucks-scores.html")
+  # page = open(filename)
+
+  doc = Nokogiri::HTML(page)
+  
+@wins = doc.css("tr:nth-child(7) .gp").text.to_i
+
+@winsDiffArray.insert(-1, @wins)
+
+if @winsDiffArray[-1] - @winsDiffArray[-2] == 0
+      @total= Goal.find_by(id: preference.goal_id).current_amount.to_i
+      @total= @total + 1
+      @total= @total.to_s
+      @a=Goal.find_by(id: preference.goal_id)
+      @a.current_amount= @total
+      @a.save
+    else
+end
+end
+end
+
+# Now just tailor each to the actual amounts of each transaction

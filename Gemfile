@@ -7,6 +7,7 @@ end
 
 gem 'mailgun-ruby', '~>1.1.6'
 gem 'twilio-ruby', '~> 5.20.1'
+gem "httparty"
 gem 'chronic'
 gem 'whenever', require: false
 gem "activeadmin"

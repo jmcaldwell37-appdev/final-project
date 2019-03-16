@@ -81,9 +81,9 @@
   <a>Add a new savings preference:</a>
   </h6>
   <div class="form-group">
-When <%= select_tag("event_id", options_from_collection_for_select(Event.all, :id, :name), :class => "form-control") %>
+When <%= select_tag("event_id", options_from_collection_for_select(Event.all, :id, :name), :prompt => "-- select event --", :class => "form-control") %>
 
-I'll save  <%= select_tag("transaction_amount", options_for_select([['$0.25', 0.25], ['$0.50', 0.5], ['$1', 1], ['$2', 2], ['$5', 5], ['$10', 10]]), :class => "form-control") %>
+I'll save  <%= select_tag("transaction_amount", options_for_select([['$0.25', 0.25], ['$0.50', 0.5], ['$1', 1], ['$2', 2], ['$5', 5], ['$10', 10]]), :prompt => "-- select amount --", :class => "form-control") %>
   </div>
 
   <div class="form-group">

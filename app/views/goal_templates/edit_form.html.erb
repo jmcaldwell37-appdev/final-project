@@ -1,8 +1,10 @@
 <h1>
-  Edit your goal: <%= @goal.name %>
+  Edit: <%= @goal.name %>
 </h1>
 
 <hr>
+
+
 
 <form action="/update_goal/<%= @goal.id %>" method="post">
 
@@ -18,6 +20,7 @@
 
     <input type="text" id="description" name="description" class="form-control" value="<%= @goal.description %>">
   </div>
+  
 
   <div class="form-group">
     <label for="name">
@@ -64,6 +67,8 @@
 </form>
 
 <hr>
+
+
 
 <a href="/goals">
   Go back

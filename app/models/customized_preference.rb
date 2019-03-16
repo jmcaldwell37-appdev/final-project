@@ -16,6 +16,8 @@ class CustomizedPreference < ApplicationRecord
   belongs_to :goal
   belongs_to :event
   
+      validates :goal_id, :presence => true, uniqueness: {scope: :event}
+      validates :user_id, :presence => true
       validates :transaction_amount, :presence => true
 
 end

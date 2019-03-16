@@ -31,7 +31,7 @@ class GoalsController < ApplicationController
     if @goal.valid?
       @goal.save
       
-      redirect_to("/customized_preferences/new", :notice => "Goal created successfully.")
+      redirect_to("/", :notice => "Goal created successfully.")
     else
       render("goal_templates/new_form_with_errors.html.erb")
     end
@@ -68,6 +68,6 @@ class GoalsController < ApplicationController
 
     @goal.destroy
 
-    redirect_to("/goals", :notice => "Goal deleted successfully.")
+    redirect_to("/", :notice => "Goal deleted successfully.")
   end
 end

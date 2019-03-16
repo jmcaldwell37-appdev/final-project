@@ -41,11 +41,6 @@
         <div class="progress">
         <div class="progress-bar" role="progressbar" style="width: <%= 100*goal.current_amount.to_f/goal.goal_amount.to_f %>%;" aria-valuenow="<%= goal.current_amount.to_i/goal.goal_amount.to_i %>" aria-valuemin="0" aria-valuemax="100"><%= 100*goal.current_amount.to_i/goal.goal_amount.to_i %>%</div>
         </div>
-        
-        <!--<a href="/photos/133815">-->
-        <!--  <img src="http://res-1.cloudinary.com/dz9hkaczr/image/upload/v1552593660/jdhhlbaimfrsvd24i08e.jpg" class="img-fluid">-->
-        <!--WANT TO TURN THIS INTO A DYNAMIC PROGRESS BAR OF THE GOAL-->
-        <!--</a>-->
 
         <div>
 
@@ -75,10 +70,35 @@
                 
                 </div>
                  <%end%>
-                
-                  
                 </div> <!-- media-body -->
               </li>
+              
+              <hr>
+              
+<form action="/create_customized_preference" method="post" class="media mb-2">
+<div class="row">
+  <h6>
+  <a>Add a new savings preference:</a>
+  </h6>
+  <div class="form-group">
+When <%= select_tag("event_id", options_from_collection_for_select(Event.all, :id, :name), :prompt => "-- select event --", :class => "form-control") %>
+
+I'll save  <%= select_tag("transaction_amount", options_for_select([['$0.25', 0.25], ['$0.50', 0.5], ['$1', 1], ['$2', 2], ['$5', 5], ['$10', 10]]), :prompt => "-- select amount --", :class => "form-control") %>
+  </div>
+
+  <div class="form-group">
+    <input type="hidden" id="user_id" name="user_id" value="<%=current_user.id%>" class="form-control">
+  </div>
+
+  <div class="form-group">
+    <input type="hidden" id="goal_id" name="goal_id" value="<%=goal.id%>" class="form-control">
+  </div>
+  
+  <button class="btn btn-outline-primary mx-4 my-4">
+    Add preference
+  </button>
+  </div>
+</form>
           </ul>
           
           

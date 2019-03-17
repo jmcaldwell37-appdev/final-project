@@ -89,4 +89,26 @@ end
 end
 end
 
-# Now just tailor each to the actual amounts of each transaction
+task :tweet_counter => :environment do 
+  
+  
+     url = "https://twitter.com/realDonaldTrump"
+    unparsed_page = HTTParty.get(url) #gets raw Html of page
+    parsed_page = Nokogiri::HTML(unparsed_page) #formatitsowecanextractdata
+    # tweets = parsed_page.css('div.content')
+    # per_page = tweets.count
+    total = parsed_page.css('span.ProfileNav-value')[0].attributes['data-count'].value
+    # tweets_array = Array.new
+    # tweets.each do |t|
+    #     tweet = {
+    #       text: t.css('div.js-tweet-text-container').text,
+          
+          
+    #     }
+    #     tweets_array << tweet
+        
+    # end
+  
+  ap(total)
+  
+end

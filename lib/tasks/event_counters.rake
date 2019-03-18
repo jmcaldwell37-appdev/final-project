@@ -89,4 +89,44 @@ end
 end
 end
 
-# Now just tailor each to the actual amounts of each transaction
+@tweetCountArray = [40932]
+
+task :tweet_counter => :environment do
+  
+CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "Donald Trump tweets").id}").each do |preference|
+  
+   url = "https://twitter.com/realDonaldTrump"
+    unparsed_page = HTTParty.get(url) #gets raw Html of page
+    parsed_page = Nokogiri::HTML(unparsed_page) #formatitsowecanextractdata
+    @tweetTotal = parsed_page.css('span.ProfileNav-value')[0].attributes['data-count'].value.to_i
+    @tweetCountArray.insert(-1,@tweetTotal)
+    
+    if @tweetCountArray[-1] - @tweetCountArray[-2] > 0
+      
+      @instances = @tweetCountArray[-1] - @tweetCountArray[-2]
+      @total= Goal.find_by(id: preference.goal_id).current_amount.to_i
+      @total= @total + (@instances * preference.transaction_amount.to_f)
+      @total= @total.to_s
+      @a=Goal.find_by(id: preference.goal_id)
+      @a.current_amount= @total
+      @a.save
+      else
+    end
+    
+    
+    # tweets = parsed_page.css('div.content')
+    # per_page = tweets.count
+    # tweets_array = Array.new
+    # tweets.each do |t|
+    #     tweet = {
+    #       text: t.css('div.js-tweet-text-container').text,
+          
+          
+    #     }
+    #     tweets_array << tweet
+    # end
+  
+  
+  
+end
+end

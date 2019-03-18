@@ -1,87 +1,88 @@
 <div class="row mb-3">
   <div class="col-md-12">
     <h1>
-      All goals
+See how others are saving:
     </h1>
-
-    <a href="/goals/new" class="btn btn-block btn-outline-secondary">
-      Add a new goal
-    </a>
-  </div>
-</div>
-
-
 <hr>
 
-<div class="row mb-3">
-  <div class="col-md-12">
-    <table class="table">
-      <tr>
-        <th>
-          User
-        </th>
-        <th>
-          Goal
-        </th>
-
-        <th>
-          Description
-        </th>
-
-
-
-        <th>
-          Goal amount
-        </th>
-
-        <th>
-          Current amount
-        </th>
-
-        <th>
-         Created at
-        </th>
-
-
-        <th>
-        </th>
-      </tr>
-
       <% @goals.each do |goal| %>
-      <tr>
+      
+<div class="row mb-5">
+  <div class="col-md-8 offset-md-2">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">
+          <a> <%=User.find_by(id: goal.user_id).first_name%></a> is saving for: <%=goal.name%>
+          <small>
+            <!--<%=goal.description%>-->
+          </small>
+        </h4>
+      </div>
 
-        <td>
-          <%= User.find(goal.user_id).first_name %>
-        </td>
+      <div class="card-body">
+        
+        <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: <%= 100*goal.current_amount.to_f/goal.goal_amount.to_f %>%;" aria-valuenow="<%= goal.current_amount.to_i/goal.goal_amount.to_i %>" aria-valuemin="0" aria-valuemax="100"><%= 100*goal.current_amount.to_i/goal.goal_amount.to_i %>%</div>
+        </div>
 
-        <td>
-          <%= goal.name %>
-        </td>
-        <td>
-          <%= goal.description %>
-        </td>
+        <div>
 
 
+          <ul class="list-unstyled pt-3">
+              <li class="media mb-2">
+                <div class="media-body">
+                  <h6>
+                    <a><%=User.find_by(id: goal.user_id).first_name%> has raised $<%=goal.current_amount%> of their $<%=goal.goal_amount%> goal!</a>
+                  </h6>
+                </div> <!-- media-body -->
+              </li>
+          </ul>
+          
+          <ul class="list-unstyled pt-3">
+              <li class="media mb-2">
+                <div class="media-body">
+                  <h6>
+                    <a>Savings Preferences for this goal:</a>
+                  </h6>
+                  
+                <% CustomizedPreference.where(goal_id: goal.id).each do |preference| %>
+                
+                <div>
+                  
+                <%=User.find_by(id: goal.user_id).first_name%> saves $<%=preference.transaction_amount%> when <a href="events/<%=preference.event_id%>"> <%= Event.find_by(id: preference.event_id).name%></a>
+                
+                </div>
+                 <%end%>
+                </div> <!-- media-body -->
+              </li>
+          </ul>
+          
+          
+          
+      <%if goal.user_id == current_user.id%>
+        <%then%>
+            <div class="btn-group d-flex" role="group">
+                <a href="/goals/<%=goal.id%>/edit" class="btn btn-warning w-100">
+                  <i class="fas fa-edit"></i>
 
-        <td>
-          <%= goal.goal_amount %>
-        </td>
+                  Edit
+                </a>
 
-        <td>
-          <%= goal.current_amount %>
-        </td>
+                <a href="/delete_goal/<%=goal.id%>" class="btn btn-danger w-100" rel="nofollow">
+                  <i class="fas fa-trash"></i>
 
-        <td>
-          <%= time_ago_in_words(goal.created_at) %> ago
-        </td>
+                  Delete
+                </a>
+            </div>
+            <%else%>
+        <%end%>
+        
+        </div>
+      </div> <!-- card-body -->
+    </div> <!-- card  -->
+  </div> <!-- col-md-8 offset-md-2 -->
+</div> <!-- row -->
 
-        <td>
-          <a href="/goals/<%= goal.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
       <% end %>
-    </table>
   </div>
 </div>

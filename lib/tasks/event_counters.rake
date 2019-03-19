@@ -1,6 +1,6 @@
 task :freezing_counter => :environment do
 require 'open-uri'
-CustomizedPreference.where(:event_id => "#{Event.first.id}").each do |preference|
+CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "the temperature drops below freezing").id}").each do |preference|
       
   @street_address = User.find_by(id: preference.user_id).location
     sanitized_street_address = URI.encode(@street_address)
@@ -113,6 +113,7 @@ CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "Donald Trump 
       else
     end
     
+    # BELOW LOGIC IS FOR EVENTUAL SENTIMENT ANALYSIS OF TWEET TEXT
     
     # tweets = parsed_page.css('div.content')
     # per_page = tweets.count

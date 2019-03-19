@@ -1,4 +1,4 @@
-# Joathan and Ravi's Final Project
+# Jonathan and Ravi's Final Project
  
 This read me provides some context to the functionalities of the application not immediately apparent from the walkthrough.
 

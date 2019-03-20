@@ -60,7 +60,11 @@
               <li class="media mb-2">
                 <div class="media-body">
                   <h6>
+                    <%if goal.current_amount.nil?%>
+                    <a>Nothing raised yet, let's set some preferences for your goal!</a>
+                    <%else%>
                     <a>You've raised $<%=goal.current_amount%> of your $<%=goal.goal_amount%> goal!</a>
+                    <%end%>
                   </h6>
                 </div> <!-- media-body -->
               </li>

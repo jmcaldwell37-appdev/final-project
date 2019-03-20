@@ -117,17 +117,14 @@ CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "Donald Trump 
     
     # tweets = parsed_page.css('div.content')
     # per_page = tweets.count
+
     # tweets_array = Array.new
     # tweets.each do |t|
     #     tweet = {
-    #       text: t.css('div.js-tweet-text-container').text,
-          
-          
+    #       text: t.css('div.js-tweet-text-container').text,      
     #     }
     #     tweets_array << tweet
     # end
-  
-  
-  
 end
 end
+

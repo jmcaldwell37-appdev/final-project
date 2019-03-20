@@ -1,7 +1,7 @@
 <div class="row mb-3">
   <div class="col-md-12">
     <h1>
-      All events
+      Browse events to apply to your goal!
     </h1>
 
     <a href="/events/new" class="btn btn-block btn-outline-secondary">
@@ -18,35 +18,11 @@
     <table class="table">
       <tr>
         <th>
-          ID
+Drip will save for you whenever:
         </th>
-
+        
         <th>
-          Name
-        </th>
-
-        <th>
-          Description
-        </th>
-
-        <th>
-          Logic
-        </th>
-
-        <th>
-          Frequency
-        </th>
-
-        <th>
-          Suggested amount
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
+         Popularity:
         </th>
 
         <th>
@@ -55,42 +31,15 @@
 
       <% @events.each do |event| %>
       <tr>
+       
         <td>
-          <%= event.id %>
+           <%= event.name %>
         </td>
 
         <td>
-          <%= event.name %>
+          <span class="badge badge-primary badge-pill"><%=CustomizedPreference.where(event_id: event.id).count%></span>
         </td>
 
-        <td>
-          <%= event.description %>
-        </td>
-
-        <td>
-          <%= event.logic %>
-        </td>
-
-        <td>
-          <%= event.frequency %>
-        </td>
-
-        <td>
-          <%= event.suggested_amount %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(event.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(event.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/events/<%= event.id %>">
-            Show details
-          </a>
-        </td>
       </tr>
       <% end %>
     </table>

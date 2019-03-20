@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FinalProject</title>
+    <title>Drip</title>
     <%= csrf_meta_tags %>
 
     <!-- Expand the number of characters we can use in the document beyond basic ASCII 🎉 -->
     <meta charset="utf-8">
+  
 
     <!-- Connect Font Awesome CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.2/css/all.css">
@@ -27,9 +28,9 @@
 
   <body>
     
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary mb-4">
   <div class="container">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand text-white font-weight-bold" href="/">
       Drip
     </a>
 
@@ -40,18 +41,16 @@
     <div class="collapse navbar-collapse" id="collapsible-nav-links">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle text-light font-italic" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Explore
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a href="/goals" class="dropdown-item">
             Browse Goals
             </a>
-            <a href="/customized_preferences" class="dropdown-item">
-              View Customized Preferences
-            </a>
+
             <a href="/events" class="dropdown-item">
-              Events
+              Browse Events
             </a>
           </div>
         </li>

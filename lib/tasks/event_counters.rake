@@ -1,6 +1,6 @@
 task :freezing_counter => :environment do
 require 'open-uri'
-CustomizedPreference.where(:event_id => "#{Event.first.id}").each do |preference|
+CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "the temperature drops below freezing").id}").each do |preference|
       
   @street_address = User.find_by(id: preference.user_id).location
     sanitized_street_address = URI.encode(@street_address)
@@ -89,26 +89,42 @@ end
 end
 end
 
-task :tweet_counter => :environment do 
+@tweetCountArray = [40932]
+
+task :tweet_counter => :environment do
   
+CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "Donald Trump tweets").id}").each do |preference|
   
-     url = "https://twitter.com/realDonaldTrump"
+   url = "https://twitter.com/realDonaldTrump"
     unparsed_page = HTTParty.get(url) #gets raw Html of page
     parsed_page = Nokogiri::HTML(unparsed_page) #formatitsowecanextractdata
+    @tweetTotal = parsed_page.css('span.ProfileNav-value')[0].attributes['data-count'].value.to_i
+    @tweetCountArray.insert(-1,@tweetTotal)
+    
+    if @tweetCountArray[-1] - @tweetCountArray[-2] > 0
+      
+      @instances = @tweetCountArray[-1] - @tweetCountArray[-2]
+      @total= Goal.find_by(id: preference.goal_id).current_amount.to_i
+      @total= @total + (@instances * preference.transaction_amount.to_f)
+      @total= @total.to_s
+      @a=Goal.find_by(id: preference.goal_id)
+      @a.current_amount= @total
+      @a.save
+      else
+    end
+    
+    # BELOW LOGIC IS FOR EVENTUAL SENTIMENT ANALYSIS OF TWEET TEXT
+    
     # tweets = parsed_page.css('div.content')
     # per_page = tweets.count
-    total = parsed_page.css('span.ProfileNav-value')[0].attributes['data-count'].value
+
     # tweets_array = Array.new
     # tweets.each do |t|
     #     tweet = {
-    #       text: t.css('div.js-tweet-text-container').text,
-          
-          
+    #       text: t.css('div.js-tweet-text-container').text,      
     #     }
     #     tweets_array << tweet
-        
     # end
-  
-  ap(total)
-  
 end
+end
+

@@ -128,3 +128,11 @@ CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "Donald Trump 
 end
 end
 
+task :master_counter => :environment do
+  
+    Rake::Task[:freezing_counter].execute
+    Rake::Task[:disaster_counter].execute
+    Rake::Task[:win_counter].execute
+    Rake::Task[:tweet_counter].execute
+end
+

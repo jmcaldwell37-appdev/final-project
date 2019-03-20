@@ -25,7 +25,7 @@ class GoalsController < ApplicationController
     @goal.name = params.fetch("name")
     @goal.d_or_s = params.fetch("d_or_s")
     @goal.goal_amount = params.fetch("goal_amount")
-    @goal.current_amount = params.fetch("current_amount")
+    @goal.current_amount = "0"
     @goal.deadline = params.fetch("deadline")
 
     if @goal.valid?

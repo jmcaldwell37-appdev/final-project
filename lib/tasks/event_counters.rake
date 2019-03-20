@@ -36,7 +36,6 @@ end
 task :disaster_counter => :environment do 
   require 'open-uri'
   
-CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "ReliefWeb declares a natural disaster").id}").each do |preference|
   
 dwurl = "https://api.reliefweb.int/v1/disasters?appname=disaster_counter&profile=list&preset=latest"
 parsed_dw_data = JSON.parse(open(dwurl).read)
@@ -44,26 +43,28 @@ parsed_dw_data = JSON.parse(open(dwurl).read)
 @totalCount = parsed_dw_data.dig("totalCount")
 @countDiffArray.insert(-1,@totalCount)
 
+
   if @countDiffArray[-1] - @countDiffArray[-2] > 0
+    
+    CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "ReliefWeb declares a natural disaster").id}").each do |preference|
       @total= Goal.find_by(id: preference.goal_id).current_amount.to_i
       @total= @total + preference.transaction_amount.to_f
       @total= @total.to_s
       @a=Goal.find_by(id: preference.goal_id)
       @a.current_amount= @total
       @a.save
+    end
+    
     else
+      
   end
   
   end
-end
 
 @winsDiffArray= [5252]
 
 task :win_counter => :environment do
   require 'open-uri'
-  
-CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "the Bucks win a game").id}").each do |preference|
-
   
 url = "https://www.nba.com/bucks/stats/team"
 page = HTTParty.get(url) 
@@ -78,22 +79,26 @@ page = HTTParty.get(url)
 @winsDiffArray.insert(-1, @wins)
 
 if @winsDiffArray[-1] - @winsDiffArray[-2] > 0
+  CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "the Bucks win a game").id}").each do |preference|
       @total= Goal.find_by(id: preference.goal_id).current_amount.to_i
       @total= @total + preference.transaction_amount.to_f
       @total= @total.to_s
       @a=Goal.find_by(id: preference.goal_id)
       @a.current_amount= @total
       @a.save
+  end
+  
     else
+      
 end
+
 end
-end
+
 
 @tweetCountArray = [40932]
 
 task :tweet_counter => :environment do
   
-CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "Donald Trump tweets").id}").each do |preference|
   
    url = "https://twitter.com/realDonaldTrump"
     unparsed_page = HTTParty.get(url) #gets raw Html of page
@@ -103,6 +108,7 @@ CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "Donald Trump 
     
     if @tweetCountArray[-1] - @tweetCountArray[-2] > 0
       
+    CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "Donald Trump tweets").id}").each do |preference|
       @instances = @tweetCountArray[-1] - @tweetCountArray[-2]
       @total= Goal.find_by(id: preference.goal_id).current_amount.to_i
       @total= @total + (@instances * preference.transaction_amount.to_f)
@@ -110,7 +116,10 @@ CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "Donald Trump 
       @a=Goal.find_by(id: preference.goal_id)
       @a.current_amount= @total
       @a.save
+    end
+    
       else
+        
     end
     
     # BELOW LOGIC IS FOR EVENTUAL SENTIMENT ANALYSIS OF TWEET TEXT
@@ -126,7 +135,7 @@ CustomizedPreference.where(:event_id => "#{Event.find_by(:name => "Donald Trump 
     #     tweets_array << tweet
     # end
 end
-end
+
 
 task :master_counter => :environment do
   

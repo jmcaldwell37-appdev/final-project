@@ -28,7 +28,7 @@ class CustomizedPreferencesController < ApplicationController
     if @customized_preference.valid?
       @customized_preference.save
 
-      redirect_to("/customized_preferences", :notice => "Customized preference created successfully.")
+      redirect_to("/", :notice => "Customized preference created successfully.")
     else
       render("customized_preference_templates/new_form_with_errors.html.erb")
     end

@@ -14,20 +14,19 @@
   </div>
 
   <div class="form-group">
-    <label for="description">
-      Description
-    </label>
-
-    <input type="text" id="description" name="description" class="form-control" value="<%= @goal.description %>">
-  </div>
-  
-
-  <div class="form-group">
     <label for="name">
       Name
     </label>
 
     <input type="text" id="name" name="name" class="form-control" value="<%= @goal.name %>">
+  </div>
+  
+  <div class="form-group">
+    <label for="description">
+      Description
+    </label>
+
+    <input type="text" id="description" name="description" class="form-control" value="<%= @goal.description %>">
   </div>
 
   <div class="form-check">
@@ -46,11 +45,9 @@
   </div>
 
   <div class="form-group">
-    <label for="current_amount">
-      Current amount
-    </label>
 
-    <input type="text" id="current_amount" name="current_amount" class="form-control" value="<%= @goal.current_amount %>">
+
+    <input type="hidden" id="current_amount" name="current_amount" class="form-control" value="<%= @goal.current_amount %>">
   </div>
 
   <div class="form-group">

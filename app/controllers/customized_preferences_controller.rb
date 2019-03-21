@@ -51,7 +51,7 @@ class CustomizedPreferencesController < ApplicationController
     if @customized_preference.valid?
       @customized_preference.save
 
-      redirect_to("/customized_preferences/#{@customized_preference.id}", :notice => "Customized preference updated successfully.")
+      redirect_to("/", :notice => "Customized preference updated successfully.")
     else
       render("customized_preference_templates/edit_form_with_errors.html.erb")
     end
@@ -62,6 +62,6 @@ class CustomizedPreferencesController < ApplicationController
 
     @customized_preference.destroy
 
-    redirect_to("/customized_preferences", :notice => "Customized preference deleted successfully.")
+    redirect_to("/", :notice => "Customized preference deleted successfully.")
   end
 end

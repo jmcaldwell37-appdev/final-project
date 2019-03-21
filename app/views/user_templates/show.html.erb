@@ -82,7 +82,9 @@
                 <div>
                   
                 You save <a href="/customized_preferences/<%=preference.id%>">$<%=preference.transaction_amount%></a> when <a href="events/<%=preference.event_id%>"> <%= Event.find_by(id: preference.event_id).name%></a>
-                
+                <a href="/delete_customized_preference/<%=preference.id%>" class="btn btn-danger mx-2 my-2" rel="nofollow"> 
+                  <i class="fa fa-trash"></i>
+                </a>
                 </div>
                  <%end%>
                 </div> <!-- media-body -->
@@ -123,13 +125,13 @@ I'll save  <%= select_tag("transaction_amount", options_for_select([['$0.25', 0.
                 <a href="/goals/<%=goal.id%>/edit" class="btn btn-warning w-100">
                   <i class="fas fa-edit"></i>
 
-                  Edit
+                  Edit Goal
                 </a>
 
                 <a href="/delete_goal/<%=goal.id%>" class="btn btn-danger w-100" rel="nofollow">
                   <i class="fas fa-trash"></i>
 
-                  Delete
+                  Delete Goal
                 </a>
             </div> <!-- btn-group btn-group-justified -->
         </div>

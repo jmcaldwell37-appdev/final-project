@@ -57,7 +57,7 @@ class GoalsController < ApplicationController
     if @goal.valid?
       @goal.save
 
-      redirect_to("/goals/#{@goal.id}", :notice => "Goal updated successfully.")
+      redirect_to("/", :notice => "Goal updated successfully.")
     else
       render("goal_templates/edit_form_with_errors.html.erb")
     end
